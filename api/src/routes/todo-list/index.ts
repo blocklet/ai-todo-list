@@ -45,6 +45,8 @@ router.use(middleware.user(), spaceClientMiddleware);
  *   get:
  *     summary: Get all todos
  *     description: Retrieve a list of all todo items.
+ *     x-summary-zh: 获取所有待办事项
+ *     x-description-zh: 检索所有待办事项列表。
  *     responses:
  *       '200':
  *         description: Successful operation. Returns a list of todos.
@@ -144,6 +146,9 @@ router.get('/:id', (req: Request, res: Response) => {
  * /api/todos:
  *   post:
  *     summary: Create a new todo
+ *     description: Create a new todo item.
+ *     x-summary-zh: 创建新的待办事项
+ *     x-description-zh: 创建新的待办事项。
  *     requestBody:
  *       required: true
  *       content:
@@ -205,6 +210,9 @@ router.post('/', async (req: Request, res: Response) => {
  * /api/todos/{id}:
  *   put:
  *     summary: Update a todo by ID
+ *     description: Update a todo item by its ID.
+ *     x-summary-zh: 通过ID更新待办事项
+ *     x-description-zh: 通过其ID更新待办事项。
  *     parameters:
  *       - in: path
  *         name: id
@@ -282,6 +290,9 @@ router.put('/:id', async (req: Request, res: Response) => {
  * /api/todos/{id}:
  *   delete:
  *     summary: Delete a todo by ID
+ *     description: Delete a todo item by its ID.
+ *     x-summary-zh: 通过ID删除待办事项
+ *     x-description-zh: 通过其ID删除待办事项。
  *     parameters:
  *       - in: path
  *         name: id

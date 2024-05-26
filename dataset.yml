@@ -2,6 +2,8 @@
   get:
     summary: Get all todos
     description: Retrieve a list of all todo items.
+    x-summary-zh: 获取所有待办事项
+    x-description-zh: 检索所有待办事项列表。
     responses:
       "200":
         description: Successful operation. Returns a list of todos.
@@ -32,6 +34,9 @@
         description: Bad request. An error occurred while processing the request.
   post:
     summary: Create a new todo
+    description: Create a new todo item.
+    x-summary-zh: 创建新的待办事项
+    x-description-zh: 创建新的待办事项。
     requestBody:
       required: true
       content:
@@ -106,6 +111,9 @@
         description: Not found. Todo with the specified ID does not exist.
   put:
     summary: Update a todo by ID
+    description: Update a todo item by its ID.
+    x-summary-zh: 通过ID更新待办事项
+    x-description-zh: 通过其ID更新待办事项。
     parameters:
       - in: path
         name: id
@@ -154,6 +162,9 @@
         description: Todo not found
   delete:
     summary: Delete a todo by ID
+    description: Delete a todo item by its ID.
+    x-summary-zh: 通过ID删除待办事项
+    x-description-zh: 通过其ID删除待办事项。
     parameters:
       - in: path
         name: id
