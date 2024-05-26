@@ -30,11 +30,10 @@ async function spaceClientMiddleware(req: Request, res: Response, next: NextFunc
   }
 
   const spaceClient = new SpaceClient({ wallet, endpoint: user.didSpace.endpoint });
-  const { data } = await spaceClient.send(new GetObjectCommand({ key: todoKey }));
-  const todoList = JSON.parse(await streamToString(data));
+  const result = await spaceClient.send(new GetObjectCommand({ key: todoKey }));
 
   req.spaceClient = spaceClient;
-  req.todoList = todoList as Todo[];
+  req.todoList = result.statusCode === 200 ? (JSON.parse(await streamToString(result.data)) as Todo[]) : [];
   next();
 }
 

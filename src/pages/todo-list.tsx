@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Typography, TextField, Button, IconButton, Box } from '@mui/material';
 import Toast from '@arcblock/ux/lib/Toast';
-import { Icon } from '@iconify-icon/react';
+import { CustomComponentRenderer } from '@blocklet/pages-kit/components';
+import { Icon } from '@blocklet/pages-kit/builtin/iconify/react';
 import RequiredLogin from './required-login';
 import { useSessionContext } from '../contexts/session';
 import { getTodos, createTodo, deleteTodo, updateTodo, Todo } from '../libs/todo';
@@ -127,59 +128,70 @@ function TodoList() {
 
   return (
     <Grid container justifyContent="center">
-      <Grid item xs={12} sm={8}>
-        <Box maxWidth={540}>
-          <Typography variant="h5" textAlign="center">
-            Todo List
-          </Typography>
-          <Box mb={2} width={1} display="flex" gap={1}>
-            <TextField
-              sx={{ flex: 1 }}
-              size="small"
-              type="text"
-              placeholder="Add your todo"
-              autoFocus
-              value={todoTitle}
-              onChange={handleInputChange}
-            />
+      <Box flex={1} display="flex" justifyContent="center">
+        <Grid item xs={12} sm={8}>
+          <Box maxWidth={540}>
+            <Typography variant="h5" textAlign="center">
+              Todo List
+            </Typography>
+            <Box mb={2} width={1} display="flex" gap={1}>
+              <TextField
+                sx={{ flex: 1 }}
+                size="small"
+                type="text"
+                placeholder="Add your todo"
+                autoFocus
+                value={todoTitle}
+                onChange={handleInputChange}
+              />
 
-            <Button
-              type="button"
-              variant="contained"
-              color="primary"
-              id="btn"
-              onClick={editTaskId ? handleUpdateTask : handleAddTask}
-              disabled={loading}>
-              {editTaskId ? 'Update' : 'Add'}
-            </Button>
+              <Button
+                type="button"
+                variant="contained"
+                color="primary"
+                id="btn"
+                onClick={editTaskId ? handleUpdateTask : handleAddTask}
+                disabled={loading}>
+                {editTaskId ? 'Update' : 'Add'}
+              </Button>
+            </Box>
+
+            {todoList.map((task) => (
+              <React.Fragment key={task.id}>
+                <TodoItem todo={task} requestInfo={false}>
+                  <Box>
+                    <IconButton
+                      size="small"
+                      onClick={() => handleEditTask(task.id)}
+                      aria-label="edit"
+                      color="primary"
+                      component="span">
+                      <Box component={Icon} icon="tabler:pencil" />
+                    </IconButton>
+                    <IconButton
+                      size="small"
+                      onClick={() => handleDeleteTask(task.id)}
+                      aria-label="delete"
+                      color="secondary"
+                      component="span">
+                      <Box component={Icon} icon="tabler:trash" />
+                    </IconButton>
+                  </Box>
+                </TodoItem>
+              </React.Fragment>
+            ))}
           </Box>
-
-          {todoList.map((task) => (
-            <React.Fragment key={task.id}>
-              <TodoItem todo={task} requestInfo={false}>
-                <Box>
-                  <IconButton
-                    size="small"
-                    onClick={() => handleEditTask(task.id)}
-                    aria-label="edit"
-                    color="primary"
-                    component="span">
-                    <Box component={Icon} icon="tabler:pencil" />
-                  </IconButton>
-                  <IconButton
-                    size="small"
-                    onClick={() => handleDeleteTask(task.id)}
-                    aria-label="delete"
-                    color="secondary"
-                    component="span">
-                    <Box component={Icon} icon="tabler:trash" />
-                  </IconButton>
-                </Box>
-              </TodoItem>
-            </React.Fragment>
-          ))}
-        </Box>
-      </Grid>
+        </Grid>
+      </Box>
+      <Box flex={1}>
+        <CustomComponentRenderer
+          componentId="grc9q1cveub6pnl8" // 固定的值，不用修改，实际是 Runtime 组件的 id
+          props={{
+            aid: 'NDQ4MDQ1OTk3NTU4MzMzNDQwL21haW4vMjAyNDA1MjUxNTUwMjItTnFBZ3dQ', // 预览 agent 地址中的 aid 参数
+            working: true, // 是否预览状态，为 true 可以直接获取最新的未保存的 agent 数据
+          }}
+        />
+      </Box>
     </Grid>
   );
 }
