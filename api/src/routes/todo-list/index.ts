@@ -6,6 +6,7 @@ import middleware from '@blocklet/sdk/lib/middlewares';
 import { Worker } from 'snowflake-uuid';
 import { authService, wallet } from '../../libs/auth';
 import wsServer from '../../ws';
+import logger from '../../libs/logger';
 
 const todoKey = 'todo-list.json';
 
@@ -30,10 +31,19 @@ async function spaceClientMiddleware(req: Request, res: Response, next: NextFunc
   }
 
   const spaceClient = new SpaceClient({ wallet, endpoint: user.didSpace.endpoint });
-  const result = await spaceClient.send(new GetObjectCommand({ key: todoKey }));
+  let result;
+
+  try {
+    result = await spaceClient.send(new GetObjectCommand({ key: todoKey }));
+    if (result.statusCode !== 200) {
+      logger.error(result.statusMessage);
+    }
+  } catch (error) {
+    logger.error(error?.message);
+  }
 
   req.spaceClient = spaceClient;
-  req.todoList = result.statusCode === 200 ? (JSON.parse(await streamToString(result.data)) as Todo[]) : [];
+  req.todoList = result?.statusCode === 200 ? (JSON.parse(await streamToString(result.data)) as Todo[]) : [];
   next();
 }
 
