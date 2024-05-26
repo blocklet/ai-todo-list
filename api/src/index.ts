@@ -8,6 +8,7 @@ import dotenv from 'dotenv-flow';
 import express, { ErrorRequestHandler } from 'express';
 import fallback from '@blocklet/sdk/lib/middlewares/fallback';
 import { createDatasetAPIRouter } from '@blocklet/dataset-sdk/openapi';
+import { getComponentsRouter } from '@blocklet/components-sdk';
 import logger from './libs/logger';
 import routes from './routes';
 import wsServer from './ws';
@@ -30,6 +31,7 @@ app.use(
     apis: [path.join(__dirname, './routes/**/*.*')],
   })
 );
+app.use('/', getComponentsRouter());
 
 const router = express.Router();
 router.use('/api', routes);

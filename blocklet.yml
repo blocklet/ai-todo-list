@@ -3,10 +3,10 @@ title: todo-list
 description: A Blocklet Server blocklet
 keywords:
   - blocklet
-  - svelte
-group: static
+  - react
+group: dapp
 did: z2qaLogGaDHvJKAPLTN1DveE4jRS5PWsRgbxP
-main: dist
+main: api/dist/index.js
 author:
   name: lipeng
   email: lipeng@arcblock.io
@@ -17,34 +17,37 @@ specVersion: 1.1.1
 version: 0.1.0
 logo: logo.png
 files:
+  - component.yml
+  - dataset.yml
+  - blocklet.yml
+  - dist
   - logo.png
   - screenshots
+  - api/hooks/pre-start.js
 interfaces:
   - type: web
     name: publicUrl
     path: /
-    prefix: "*"
+    prefix: '*'
     port: BLOCKLET_PORT
     protocol: http
-community: ""
-documentation: ""
-homepage: ""
-license: ""
+community: ''
+documentation: ''
+homepage: ''
+license: ''
 payment:
   price: []
   share: []
 timeout:
   start: 60
 requirements:
-  server: ">=1.16.25"
-  os: "*"
-  cpu: "*"
+  server: '>=1.6.29'
+  os: '*'
+  cpu: '*'
 scripts:
+  preStart: node api/hooks/pre-start.js
   dev: npm run start
 environments: []
-capabilities:
-  didSpace: requiredOnConnect
-screenshots:
-  - 1-login.png
-  - 2-ui.png
+capabilities: {}
+screenshots: []
 components: []

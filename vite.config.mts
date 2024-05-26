@@ -156,7 +156,7 @@ export default defineConfig(() => {
       );
 
       await fs.writeFile(path.resolve(currentDir, 'component.yml'), stringify(output));
-      console.log(chalk.greenBright('All Vite builds completed'));
+      console.log(chalk.greenBright('All React ES Builds Completed'));
     },
   };
 }

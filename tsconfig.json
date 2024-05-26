@@ -105,9 +105,9 @@
     "paths": {
       // FIXME: Just for local dev, comment next line before publish
       // "@blocklet/pages-kit/*": ["../pages-kit/packages/pages-kit/src/*"],
-      "@blocklet/components-sdk/*": ["../ai-studio/packages/components-sdk/src/*"],
-      "@blocklet/dataset-sdk": ["../ai-studio/packages/dataset-sdk/src"],
-      "@blocklet/dataset-sdk/*": ["../ai-studio/packages/dataset-sdk/src/*"]
+      // "@blocklet/components-sdk/*": ["../ai-studio/packages/components-sdk/src/*"],
+      // "@blocklet/dataset-sdk": ["../ai-studio/packages/dataset-sdk/src"],
+      // "@blocklet/dataset-sdk/*": ["../ai-studio/packages/dataset-sdk/src/*"]
     }
   }
 }
