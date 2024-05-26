@@ -1,0 +1,16 @@
+title: TODO Blocklet
+description: TODO Blocklet Remote React Component
+version: 1.0.0
+type: react-component-protocol
+blocklet:
+  name: todo-list
+  did: z2qaLogGaDHvJKAPLTN1DveE4jRS5PWsRgbxP
+components:
+  - name: TODO ITEM
+    url: /item.es.mjs
+    tags:
+      - aigne-view
+  - name: TODO LIST
+    url: /list.es.mjs
+    tags:
+      - aigne-view

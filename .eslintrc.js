@@ -9,5 +9,6 @@ module.exports = {
   },
   rules: {
     '@typescript-eslint/comma-dangle': 'off',
+    'react/require-default-props': 'off',
   },
 };

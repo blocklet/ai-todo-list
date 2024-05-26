@@ -5,6 +5,6 @@ import todoListRouter from './todo-list';
 const router = Router();
 
 router.use('/user', middleware.user(), (req, res) => res.json(req.user || {}));
-router.use('/todo-list', middleware.user(), todoListRouter);
+router.use('/todos', middleware.user(), todoListRouter);
 
 export default router;

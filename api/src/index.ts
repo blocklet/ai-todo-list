@@ -7,9 +7,10 @@ import cors from 'cors';
 import dotenv from 'dotenv-flow';
 import express, { ErrorRequestHandler } from 'express';
 import fallback from '@blocklet/sdk/lib/middlewares/fallback';
-
+import { createDatasetAPIRouter } from '@blocklet/dataset-sdk/openapi';
 import logger from './libs/logger';
 import routes from './routes';
+import wsServer from './ws';
 
 dotenv.config();
 
@@ -22,6 +23,13 @@ app.use(cookieParser());
 app.use(express.json({ limit: '1 mb' }));
 app.use(express.urlencoded({ extended: true, limit: '1 mb' }));
 app.use(cors());
+
+app.use(
+  '/',
+  createDatasetAPIRouter('TODO', path.join(process.env.BLOCKLET_APP_DIR!, 'dataset.yml'), {
+    apis: [path.join(__dirname, './routes/**/*.*')],
+  })
+);
 
 const router = express.Router();
 router.use('/api', routes);
@@ -47,3 +55,5 @@ export const server = app.listen(port, (err?: any) => {
   if (err) throw err;
   logger.info(`> ${name} v${version} ready on ${port}`);
 });
+
+wsServer.attach(server);
