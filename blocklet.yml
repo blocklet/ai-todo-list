@@ -1,6 +1,6 @@
 name: todo-list
-title: todo-list
-description: A Blocklet Server blocklet
+title: TODO LIST
+description: Store data in DID Space's TODO LIST, which can be used in combination with AI.
 keywords:
   - blocklet
   - react
