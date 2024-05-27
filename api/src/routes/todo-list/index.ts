@@ -96,47 +96,6 @@ router.get('/', (req: Request, res: Response) => {
   }
 });
 
-/**
- * @openapi
- * /api/todos/{id}:
- *   get:
- *     summary: Get a todo by ID
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: ID of the todo to retrieve
- *         schema:
- *           type: string
- *     responses:
- *       '200':
- *         description: Successful operation. Returns the requested todo item.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 todo:
- *                   type: object
- *                   properties:
- *                     id:
- *                       type: string
- *                       description: The unique identifier of the todo item.
- *                     title:
- *                       type: string
- *                       description: The title of the todo item.
- *                     completed:
- *                       type: boolean
- *                       description: Indicates whether the todo item is completed or not.
- *                     updatedAt:
- *                       type: string
- *                       format: date-time
- *                       description: The timestamp when the todo item was last updated.
- *       '404':
- *         description: Not found. Todo with the specified ID does not exist.
- *       '400':
- *         description: Bad request. An error occurred while processing the request.
- */
 router.get('/:id', (req: Request, res: Response) => {
   try {
     const { id } = req.params;
