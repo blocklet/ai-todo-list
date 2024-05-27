@@ -1,3 +1,7 @@
+## 0.1.4 (2024-5-27)
+
+- fix: list page ux
+
 ## 0.1.3 (2024-5-27)
 
 - fix: process is not defined

@@ -110,6 +110,9 @@ importers:
       snowflake-uuid:
         specifier: ^1.0.0
         version: 1.0.0
+      swagger-jsdoc:
+        specifier: ^6.2.8
+        version: 6.2.8(openapi-types@12.1.3)
       ufo:
         specifier: ^1.5.3
         version: 1.5.3

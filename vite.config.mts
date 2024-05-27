@@ -10,8 +10,8 @@ import { joinURL } from 'ufo';
 import { $, chalk, fs, path } from 'zx';
 import { stringify, parse } from 'yaml';
 import Joi from 'joi';
-
-// import buildOpenAPIPlugin from '@blocklet/dataset-sdk/plugin';
+import { writeFile } from 'fs/promises';
+import swaggerJSDoc from 'swagger-jsdoc';
 
 function buildReactComponentPlugin({
   title,
@@ -179,6 +179,30 @@ export default defineConfig(() => {
   };
 }
 
+function buildOpenAPIPlugin(openapiOptions?: swaggerJSDoc.Options): any {
+  return {
+    name: 'generate-openapi',
+    apply: 'build',
+    async buildStart() {
+      const options = {
+        definition: {
+          openapi: '3.0.0',
+          info: {
+            title: 'API Find Protocol',
+            version: '1.0.0',
+          },
+        },
+        failOnErrors: true,
+        ...(openapiOptions || {}),
+      };
+      const swaggerSpec = swaggerJSDoc(options) as { paths: any };
+      await writeFile('dataset.yml', stringify(swaggerSpec?.paths || []));
+      // eslint-disable-next-line no-console
+      console.log('OpenAPI Vite builds completed');
+    },
+  };
+}
+
 // https://vitejs.dev/config/
 export default defineConfig(() => {
   return {
@@ -201,7 +225,7 @@ export default defineConfig(() => {
           },
         ],
       }),
-      // buildOpenAPIPlugin({ apis: [path.join(__dirname, './api/src/routes/**/*.*')] }),
+      buildOpenAPIPlugin({ apis: [path.join(__dirname, './api/src/routes/**/*.*')] }),
       createBlockletPlugin(),
       svgr(),
     ],

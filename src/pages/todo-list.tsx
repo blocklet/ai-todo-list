@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Typography, TextField, Button, IconButton, Box } from '@mui/material';
+import { Grid, Typography, TextField, Button, IconButton, Box, Paper } from '@mui/material';
 import Toast from '@arcblock/ux/lib/Toast';
 import { CustomComponentRenderer } from '@blocklet/pages-kit/components';
 import { Icon } from '@blocklet/pages-kit/builtin/iconify/react';
@@ -183,7 +183,10 @@ function TodoList() {
       </Box>
 
       {!!window?.blocklet?.preferences?.runtimeAID && (
-        <Box flex={1}>
+        <Paper
+          elevation={0}
+          variant="outlined"
+          sx={{ flex: 1, p: 2, mr: 2, height: 1, minHeight: 500, boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
           <CustomComponentRenderer
             componentId="grc9q1cveub6pnl8" // 固定的值，不用修改，实际是 Runtime 组件的 id
             props={{
@@ -191,7 +194,7 @@ function TodoList() {
               working: true, // 是否预览状态，为 true 可以直接获取最新的未保存的 agent 数据
             }}
           />
-        </Box>
+        </Paper>
       )}
     </Grid>
   );
