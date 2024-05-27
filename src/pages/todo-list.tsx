@@ -128,7 +128,7 @@ function TodoList() {
 
   return (
     <Grid container justifyContent="center">
-      <Box flex={1} display="flex" justifyContent="center">
+      <Box flex={2} display="flex" justifyContent="center">
         <Grid item xs={12} sm={8}>
           <Box maxWidth={540}>
             <Typography variant="h5" textAlign="center">
@@ -183,15 +183,18 @@ function TodoList() {
           </Box>
         </Grid>
       </Box>
-      <Box flex={1}>
-        <CustomComponentRenderer
-          componentId="grc9q1cveub6pnl8" // 固定的值，不用修改，实际是 Runtime 组件的 id
-          props={{
-            aid: 'NDQ4MDQ1OTk3NTU4MzMzNDQwL21haW4vMjAyNDA1MjUxNTUwMjItTnFBZ3dQ', // 预览 agent 地址中的 aid 参数
-            working: true, // 是否预览状态，为 true 可以直接获取最新的未保存的 agent 数据
-          }}
-        />
-      </Box>
+
+      {!!window?.blocklet?.preferences?.runtimeAID && (
+        <Box flex={1}>
+          <CustomComponentRenderer
+            componentId="grc9q1cveub6pnl8" // 固定的值，不用修改，实际是 Runtime 组件的 id
+            props={{
+              aid: window?.blocklet?.preferences?.runtimeAID, // 预览 agent 地址中的 aid 参数
+              working: true, // 是否预览状态，为 true 可以直接获取最新的未保存的 agent 数据
+            }}
+          />
+        </Box>
+      )}
     </Grid>
   );
 }

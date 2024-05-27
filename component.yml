@@ -4,7 +4,7 @@ version: 1.0.0
 type: react-component-protocol
 blocklet:
   name: todo-list
-  did: z2qaLogGaDHvJKAPLTN1DveE4jRS5PWsRgbxP
+  did: z2qa8QkeN9aSTWL6ZAq7JHLeVbixrLtgLkTFh
 components:
   - name: TODO ITEM
     url: /item.es.mjs

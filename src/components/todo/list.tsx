@@ -5,8 +5,12 @@ import TodoItem from '../todo-item';
 import { Todo } from '../../libs/todo';
 
 function TodoList({ outputValue }: { outputValue: Todo[] }) {
-  if (!outputValue?.length) {
+  if (outputValue === undefined) {
     return null;
+  }
+
+  if (!outputValue?.length) {
+    return 'No task currently, Please add tasks first.';
   }
 
   return (

@@ -5,7 +5,6 @@ keywords:
   - blocklet
   - react
 group: dapp
-did: z2qaLogGaDHvJKAPLTN1DveE4jRS5PWsRgbxP
 main: api/dist/index.js
 author:
   name: lipeng
@@ -51,3 +50,4 @@ environments: []
 capabilities: {}
 screenshots: []
 components: []
+did: z2qa8QkeN9aSTWL6ZAq7JHLeVbixrLtgLkTFh

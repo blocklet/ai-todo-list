@@ -42,6 +42,7 @@
     "@arcblock/did-connect": "^2.9.85",
     "@arcblock/ux": "^2.9.85",
     "@arcblock/ws": "^1.18.121",
+    "@blocklet/components-sdk": "^0.2.13",
     "@blocklet/dataset-sdk": "^0.2.11",
     "@blocklet/pages-kit": "^0.2.319",
     "@blocklet/sdk": "^1.16.26",

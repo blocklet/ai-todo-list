@@ -2,7 +2,7 @@ import { Todo } from '../../libs/todo';
 import TodoItem from '../todo-item';
 
 function Item({ outputValue }: { outputValue: Todo }) {
-  if (!outputValue?.id) {
+  if (outputValue?.id === undefined) {
     return null;
   }
 

@@ -11,28 +11,27 @@ interface TodoComp {
 }
 
 function TodoItem({ todo, children, requestInfo }: TodoComp) {
-  const { id, title } = todo;
-  const [completed, setCompleted] = useState(todo.completed);
+  const [task, setTask] = useState(todo);
 
   useEffect(() => {
     const fetchData = async () => {
       if (!requestInfo) return;
 
       try {
-        const result = await getTodo({ id });
-        setCompleted(result.todo.completed);
+        const result = await getTodo({ id: todo?.id });
+        setTask((r) => ({ ...r, completed: result.todo.completed }));
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchData();
-  }, [id, requestInfo]);
+  }, [todo?.id, requestInfo]);
 
   const handleCheckboxChange = async () => {
     try {
-      setCompleted((prevCompleted) => !prevCompleted);
-      await updateTodo(id, { completed: !completed });
+      setTask((r) => ({ ...r, completed: !r.completed }));
+      await updateTodo(todo?.id, { completed: !task.completed });
       Toast.success('Task updated successfully');
     } catch (error) {
       console.error(error);
@@ -40,11 +39,18 @@ function TodoItem({ todo, children, requestInfo }: TodoComp) {
     }
   };
 
+  useEffect(() => {
+    setTask(todo);
+  }, [todo]);
+
   return (
     <CSSTransition classNames="fade" timeout={300}>
       <Box display="flex" gap={1}>
         <Box flex={1}>
-          <FormControlLabel control={<Checkbox checked={completed} onChange={handleCheckboxChange} />} label={title} />
+          <FormControlLabel
+            control={<Checkbox checked={task.completed} onChange={handleCheckboxChange} />}
+            label={task.title}
+          />
         </Box>
         {children}
       </Box>

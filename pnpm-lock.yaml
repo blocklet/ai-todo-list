@@ -23,6 +23,9 @@ importers:
       '@arcblock/ws':
         specifier: ^1.18.121
         version: 1.18.121
+      '@blocklet/components-sdk':
+        specifier: ^0.2.13
+        version: 0.2.13
       '@blocklet/dataset-sdk':
         specifier: ^0.2.11
         version: 0.2.11
@@ -504,6 +507,9 @@ packages:
       '@mui/material': ^5.14.11
       react: ^18.2.0
       react-router-dom: ^6.16.0
+
+  '@blocklet/components-sdk@0.2.13':
+    resolution: {integrity: sha512-pce+J7+xTwRZycIPM9P7AhpdMVYdBIrW/ObXlaCitBbCvsaJO8YxQnp94v/+wGTk3l5+iKXvu6NfDaMGa2z8jQ==}
 
   '@blocklet/constant@1.16.26':
     resolution: {integrity: sha512-ZUP6VM4ylTmxfvlRiYuGd/VWDbAKmipLarM1kqbIJYFUxyADjXuiBUxFwKnk1R6OkPk5YFF7ZsRJ/vKNaKVf4Q==}
@@ -5279,10 +5285,12 @@ packages:
 
   rimraf@2.6.3:
     resolution: {integrity: sha512-mwqeW5XsA2qAejG46gYdENaxXjx9onRNCfn7L0duuP4hCuTIi/QO7PDK07KJfp1d+izWPrzEJDcSqBa0OZQriA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   ripemd160@2.0.2:
@@ -7207,6 +7215,23 @@ snapshots:
       - sqlite3
       - supports-color
       - tedious
+      - utf-8-validate
+
+  '@blocklet/components-sdk@0.2.13':
+    dependencies:
+      '@blocklet/constant': 1.16.26
+      '@blocklet/sdk': 1.16.26
+      axios: 1.7.2(debug@4.3.4)
+      express: 4.19.2
+      joi: 17.13.1
+      lodash: 4.17.21
+      ufo: 1.5.3
+      yaml: 2.4.2
+    transitivePeerDependencies:
+      - bufferutil
+      - debug
+      - encoding
+      - supports-color
       - utf-8-validate
 
   '@blocklet/constant@1.16.26': {}

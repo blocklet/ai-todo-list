@@ -4,6 +4,7 @@ import { GetObjectCommand, PutObjectCommand, SpaceClient } from '@did-space/clie
 import { streamToString } from '@did-space/core';
 import middleware from '@blocklet/sdk/lib/middlewares';
 import { Worker } from 'snowflake-uuid';
+import { isNil } from 'lodash';
 import { authService, wallet } from '../../libs/auth';
 import wsServer from '../../ws';
 import logger from '../../libs/logger';
@@ -278,14 +279,15 @@ router.put('/:id', async (req: Request, res: Response) => {
     const index = todoList.findIndex((todo: any) => todo.id === id);
     if (index !== -1) {
       const params = {
-        ...(title ? { title } : {}),
-        ...(completed ? { completed } : {}),
+        ...(!isNil(title) ? { title } : {}),
+        ...(!isNil(completed) ? { completed } : {}),
       };
-      todoList[index] = { ...todoList[index], ...params } as Todo;
+      const updateTodo = { ...todoList[index], ...params } as Todo;
+      todoList[index] = updateTodo;
       await req.spaceClient.send(new PutObjectCommand({ key: todoKey, data: JSON.stringify(todoList) }));
-      wsServer.broadcast('todo:update', { todo: todoList[index] });
+      wsServer.broadcast('todo:update', { todo: updateTodo });
 
-      res.json({ todo: todoList[index] });
+      res.json({ todo: updateTodo });
     } else {
       res.status(404).send('Todo not found');
     }
