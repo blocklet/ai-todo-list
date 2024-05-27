@@ -3,7 +3,7 @@ description: TODO Blocklet Remote React Component
 version: 1.0.0
 type: react-component-protocol
 blocklet:
-  name: todo-list
+  name: z2qa8QkeN9aSTWL6ZAq7JHLeVbixrLtgLkTFh
   did: z2qa8QkeN9aSTWL6ZAq7JHLeVbixrLtgLkTFh
 components:
   - name: TODO ITEM

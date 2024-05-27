@@ -10,6 +10,7 @@ import { joinURL } from 'ufo';
 import { $, chalk, fs, path } from 'zx';
 import { stringify, parse } from 'yaml';
 import Joi from 'joi';
+
 // import buildOpenAPIPlugin from '@blocklet/dataset-sdk/plugin';
 
 function buildReactComponentPlugin({
@@ -45,6 +46,7 @@ function buildReactComponentPlugin({
 
   const blockletSchema = Joi.object({
     name: Joi.string().required(),
+    title: Joi.string().required(),
     did: Joi.string().required(),
   }).required();
 
@@ -88,6 +90,18 @@ function buildReactComponentPlugin({
         }
         console.log(chalk.greenBright(`[info]: Executing Vite build ${file}`));
 
+        const viteConfigPath = path.resolve(currentDir, viteConfigFile);
+        if (fs.existsSync(viteConfigPath)) {
+          try {
+            await $`rm ${viteConfigPath}`;
+            console.log(`${viteConfigFile} deleted successfully`);
+          } catch (error) {
+            console.error(`Error deleting ${viteConfigFile}:`, error);
+          }
+        } else {
+          console.log(`${viteConfigFile} does not exist`);
+        }
+
         // 更新 Vite 配置文件
         await fs.writeFile(
           viteConfigFile,
@@ -112,6 +126,9 @@ export default defineConfig(() => {
         formats: ['es'],
         fileName: (format) => \`[name].\${format}.mjs\`,
       },
+    },
+    define: {
+      'process.env': {},
     },
   };
 });
@@ -148,6 +165,7 @@ export default defineConfig(() => {
           type: 'react-component-protocol',
           blocklet: {
             name: blocklet.name,
+            title: blocklet.title,
             did: blocklet.did,
           },
           components: list,
