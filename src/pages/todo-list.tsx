@@ -129,59 +129,57 @@ function TodoList() {
   return (
     <Grid container justifyContent="center">
       <Box flex={2} display="flex" justifyContent="center">
-        <Grid item xs={12} sm={8}>
-          <Box maxWidth={540}>
-            <Typography variant="h5" textAlign="center">
-              Todo List
-            </Typography>
-            <Box mb={2} width={1} display="flex" gap={1}>
-              <TextField
-                sx={{ flex: 1 }}
-                size="small"
-                type="text"
-                placeholder="Add your todo"
-                autoFocus
-                value={todoTitle}
-                onChange={handleInputChange}
-              />
+        <Box maxWidth={540} width={1}>
+          <Typography variant="h5" textAlign="center" mb={2}>
+            Todo List
+          </Typography>
+          <Box mb={2} width={1} display="flex" gap={1}>
+            <TextField
+              sx={{ flex: 1 }}
+              size="small"
+              type="text"
+              placeholder="Add your todo"
+              autoFocus
+              value={todoTitle}
+              onChange={handleInputChange}
+            />
 
-              <Button
-                type="button"
-                variant="contained"
-                color="primary"
-                id="btn"
-                onClick={editTaskId ? handleUpdateTask : handleAddTask}
-                disabled={loading}>
-                {editTaskId ? 'Update' : 'Add'}
-              </Button>
-            </Box>
-
-            {todoList.map((task) => (
-              <React.Fragment key={task.id}>
-                <TodoItem todo={task} requestInfo={false}>
-                  <Box>
-                    <IconButton
-                      size="small"
-                      onClick={() => handleEditTask(task.id)}
-                      aria-label="edit"
-                      color="primary"
-                      component="span">
-                      <Box component={Icon} icon="tabler:pencil" />
-                    </IconButton>
-                    <IconButton
-                      size="small"
-                      onClick={() => handleDeleteTask(task.id)}
-                      aria-label="delete"
-                      color="secondary"
-                      component="span">
-                      <Box component={Icon} icon="tabler:trash" />
-                    </IconButton>
-                  </Box>
-                </TodoItem>
-              </React.Fragment>
-            ))}
+            <Button
+              type="button"
+              variant="contained"
+              color="primary"
+              id="btn"
+              onClick={editTaskId ? handleUpdateTask : handleAddTask}
+              disabled={loading}>
+              {editTaskId ? 'Update' : 'Add'}
+            </Button>
           </Box>
-        </Grid>
+
+          {todoList.map((task) => (
+            <React.Fragment key={task.id}>
+              <TodoItem todo={task} requestInfo={false}>
+                <Box>
+                  <IconButton
+                    size="small"
+                    onClick={() => handleEditTask(task.id)}
+                    aria-label="edit"
+                    color="primary"
+                    component="span">
+                    <Box component={Icon} icon="tabler:pencil" />
+                  </IconButton>
+                  <IconButton
+                    size="small"
+                    onClick={() => handleDeleteTask(task.id)}
+                    aria-label="delete"
+                    color="secondary"
+                    component="span">
+                    <Box component={Icon} icon="tabler:trash" />
+                  </IconButton>
+                </Box>
+              </TodoItem>
+            </React.Fragment>
+          ))}
+        </Box>
       </Box>
 
       {!!window?.blocklet?.preferences?.runtimeAID && (
