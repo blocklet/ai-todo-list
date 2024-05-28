@@ -287,7 +287,7 @@ router.post('/', async (req: Request, res: Response) => {
     const { todoList } = req;
     todoList.push(newTodo);
     await req.spaceClient.send(new PutObjectCommand({ key: todoKey, data: JSON.stringify(todoList) }));
-    wsServer.broadcast('todo:add', { todo: newTodo });
+    wsServer.broadcast('todo:add', { todo: newTodo, userId: req.user?.did });
 
     res.json({ todo: newTodo });
   } catch (error) {
@@ -354,18 +354,19 @@ router.post('/', async (req: Request, res: Response) => {
 router.put('/:id', async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { title, completed } = req.body;
+    const { title, completed, todoTime } = req.body;
     const { todoList } = req;
     const index = todoList.findIndex((todo: any) => todo.id === id);
     if (index !== -1) {
       const params = {
         ...(!isNil(title) ? { title } : {}),
         ...(!isNil(completed) ? { completed } : {}),
+        ...(!isNil(todoTime) ? { todoTime: dayjs(todoTime).format('YYYY-MM-DD HH:mm') } : {}),
       };
       const updateTodo = { ...todoList[index], ...params } as Todo;
       todoList[index] = updateTodo;
       await req.spaceClient.send(new PutObjectCommand({ key: todoKey, data: JSON.stringify(todoList) }));
-      wsServer.broadcast('todo:update', { todo: updateTodo });
+      wsServer.broadcast('todo:update', { todo: updateTodo, userId: req.user?.did });
 
       res.json({ todo: updateTodo });
     } else {
@@ -427,7 +428,7 @@ router.delete('/:id', async (req: Request, res: Response) => {
     if (index !== -1) {
       const deletedTodo = todoList.splice(index, 1)[0];
       await req.spaceClient.send(new PutObjectCommand({ key: todoKey, data: JSON.stringify(todoList) }));
-      wsServer.broadcast('todo:delete', { todo: deletedTodo });
+      wsServer.broadcast('todo:delete', { todo: deletedTodo, userId: req.user?.did });
 
       res.json({ todo: deletedTodo });
     } else {

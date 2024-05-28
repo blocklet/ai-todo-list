@@ -1,4 +1,4 @@
-import { Alert, Button, Grid } from '@mui/material';
+import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSessionContext } from '../contexts/session';
@@ -16,13 +16,13 @@ type RequiredLoginProps = {
  * } & import('@mui/material').GridProps} { onLogin = () => {}, nextUrl = undefined, ...rest }
  * @return {*}
  */
-function RequiredLogin({ onLogin = () => {}, nextUrl = undefined, ...rest }: Readonly<RequiredLoginProps>) {
+function RequiredLogin({ nextUrl = undefined, ...rest }: Readonly<RequiredLoginProps>) {
   const { session } = useSessionContext();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!session.user) {
-      session.login(onLogin);
+      // session.login(onLogin);
     } else if (session.user && nextUrl) {
       navigate(`${nextUrl}${window.location.search}`, { replace: false });
     }
@@ -31,16 +31,21 @@ function RequiredLogin({ onLogin = () => {}, nextUrl = undefined, ...rest }: Rea
 
   return (
     <Grid container justifyContent="center" {...rest}>
-      <Grid item justifyContent="center" textAlign="center" xl={12} lg={12}>
-        <Alert severity="warning">Connect to the DID Wallet login to access the website</Alert>
-        <Button
-          onClick={() => session.login()}
-          style={{ marginTop: 16, textTransform: 'none' }}
-          variant="contained"
-          color="primary">
-          Login
-        </Button>
-      </Grid>
+      {blocklet && (
+        <Stack alignItems="center" justifyContent="center" gap={3} minHeight="60vh">
+          <Box component="img" src={blocklet?.appLogo} width={80} borderRadius={80} />
+          <Typography variant="h4">Todo List</Typography>
+          <Typography variant="h5" component="div" color="text.secondary" textAlign="center">
+            The decentralized AI Todo List access solution for blocklets
+          </Typography>
+
+          <Stack direction="row" gap={3}>
+            <Button onClick={session.user ? session.switchDid : session.login} variant="contained">
+              Login as Admin to access playground
+            </Button>
+          </Stack>
+        </Stack>
+      )}
     </Grid>
   );
 }

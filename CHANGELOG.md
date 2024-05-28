@@ -1,3 +1,7 @@
+## 0.1.6 (2024-5-28)
+
+- fix: bug bash issue
+
 ## 0.1.5 (2024-5-28)
 
 - chore: support todo time

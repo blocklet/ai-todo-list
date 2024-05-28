@@ -24,16 +24,16 @@ export function getTodo({ id }: { id: string }): Promise<{ todo: Todo }> {
   return axios.get(joinURL(getComponentMountPoint(TODO), '/api/todos', id)).then((res) => res.data);
 }
 
-export function createTodo({ title }: { title: string }): Promise<{ todo: Todo }> {
-  return axios.post(joinURL(getComponentMountPoint(TODO), '/api/todos'), { title }).then((res) => res.data);
+export function createTodo({ title, todoTime }: { title: string; todoTime: string }): Promise<{ todo: Todo }> {
+  return axios.post(joinURL(getComponentMountPoint(TODO), '/api/todos'), { title, todoTime }).then((res) => res.data);
 }
 
 export function updateTodo(
   id: string,
-  { title, completed }: { title?: string; completed?: boolean }
+  { title, completed, todoTime }: { title?: string; completed?: boolean; todoTime?: string }
 ): Promise<{ todo: Todo }> {
   return axios
-    .put(joinURL(getComponentMountPoint(TODO), '/api/todos', id), { title, completed })
+    .put(joinURL(getComponentMountPoint(TODO), '/api/todos', id), { title, completed, todoTime })
     .then((res) => res.data);
 }
 

@@ -27,11 +27,11 @@ export default function getWsClient() {
   return client;
 }
 
-export const useSubscription: (event: any, cb?: ({ todo }: { todo: Todo }) => void, deps?: any[]) => void = (
+export const useSubscription: (
   event: any,
-  cb = () => {},
-  deps = []
-) => {
+  cb?: ({ todo, userId }: { todo: Todo; userId: string }) => void,
+  deps?: any[]
+) => void = (event: any, cb = () => {}, deps = []) => {
   const { session } = useSessionContext();
   if (!client) {
     client = getWsClient();
