@@ -8,10 +8,10 @@ blocklet:
   did: z2qa8QkeN9aSTWL6ZAq7JHLeVbixrLtgLkTFh
 components:
   - name: TODO ITEM
-    url: /item.es.mjs
+    url: /item.es.mjs?1716895613683
     tags:
       - aigne-view
   - name: TODO LIST
-    url: /list.es.mjs
+    url: /list.es.mjs?1716895616571
     tags:
       - aigne-view

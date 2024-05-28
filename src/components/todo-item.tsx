@@ -20,7 +20,7 @@ function TodoItem({ todo, children, requestInfo }: TodoComp) {
 
       try {
         const result = await getTodo({ id: todo?.id });
-        setTask((r) => ({ ...r, completed: result.todo.completed }));
+        setTask((r) => ({ ...r, completed: result.todo.completed, todoTime: result.todo.todoTime }));
       } catch (error) {
         console.error(error);
       }
@@ -44,15 +44,19 @@ function TodoItem({ todo, children, requestInfo }: TodoComp) {
     setTask(todo);
   }, [todo]);
 
+  // eslint-disable-next-line no-console
+  console.log(task);
+
   return (
     <CSSTransition classNames="fade" timeout={300}>
       <Box display="flex" gap={1}>
         <Box flex={1}>
-          <Box display="flex" alignItems="center" gap={1}>
+          <Box display="flex" alignItems="center">
             <FormControlLabel
               control={<Checkbox checked={task.completed} onChange={handleCheckboxChange} />}
               label={task.title}
             />
+
             {task?.todoTime && (
               <Typography
                 sx={{
