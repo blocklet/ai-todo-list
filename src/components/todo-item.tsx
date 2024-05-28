@@ -44,9 +44,6 @@ function TodoItem({ todo, children, requestInfo }: TodoComp) {
     setTask(todo);
   }, [todo]);
 
-  // eslint-disable-next-line no-console
-  console.log(task);
-
   return (
     <CSSTransition classNames="fade" timeout={300}>
       <Box display="flex" gap={1}>
