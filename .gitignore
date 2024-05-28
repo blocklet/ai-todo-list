@@ -26,6 +26,6 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-public/*.es.mjs
+public/*.es.*
 tsconfig.tsbuildinfo
 vite.config.mts.*

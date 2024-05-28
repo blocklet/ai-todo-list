@@ -204,6 +204,16 @@ function TodoList() {
                   autoFocus
                   value={todo.title}
                   onChange={handleInputChange}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                      if (editTaskId) {
+                        handleUpdateTask();
+                      } else {
+                        handleAddTask();
+                      }
+                    }
+                  }}
                 />
 
                 <IconButton {...bindTrigger(state)}>

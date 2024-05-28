@@ -1,6 +1,6 @@
 {
   "name": "todo-list",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "scripts": {
     "dev": "blocklet dev",
     "lint": "tsc --noEmit && eslint src api/src --ext .mjs,.js,.jsx,.ts,.tsx",

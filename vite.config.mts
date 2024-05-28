@@ -141,7 +141,7 @@ export default defineConfig(() => {
 
         list.push({
           name: files[i]?.name,
-          url: joinURL('/', `${name}.es.mjs`),
+          url: joinURL('/', `${name}.es.mjs?${+new Date()}`),
           description: files[i]?.description,
           tags: files[i]?.tags,
           parameter: files[i]?.parameter,
