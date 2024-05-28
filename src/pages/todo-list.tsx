@@ -228,11 +228,7 @@ function TodoList() {
                             <DateCalendar
                               value={dayjs(todo.todoTime || '')}
                               onChange={(newValue) => {
-                                if (newValue) {
-                                  setTodo((r) => ({ ...r, todoTime: dayjs(newValue).format('YYYY-MM-DD HH:mm') }));
-                                }
-
-                                state.close();
+                                setTodo((r) => ({ ...r, todoTime: dayjs(newValue).format('YYYY-MM-DD HH:mm') }));
                               }}
                             />
                           </DemoContainer>
