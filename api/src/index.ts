@@ -25,12 +25,8 @@ app.use(express.json({ limit: '1 mb' }));
 app.use(express.urlencoded({ extended: true, limit: '1 mb' }));
 app.use(cors());
 
-app.use(
-  '/',
-  createDatasetAPIRouter('TODO', path.join(process.env.BLOCKLET_APP_DIR!, 'dataset.yml'), {
-    apis: [path.join(__dirname, './routes/**/*.*')],
-  })
-);
+const openAPIPath = path.join(process.env.BLOCKLET_APP_DIR!, 'dataset.yml');
+app.use('/', createDatasetAPIRouter('TODO', openAPIPath, { apis: [path.join(__dirname, './routes/**/*.*')] }));
 app.use('/', getComponentsRouter());
 
 const router = express.Router();

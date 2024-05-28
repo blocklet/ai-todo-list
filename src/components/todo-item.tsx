@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import Toast from '@arcblock/ux/lib/Toast';
-import { Box, Checkbox, FormControlLabel } from '@mui/material';
+import { Box, Checkbox, FormControlLabel, Typography } from '@mui/material';
+import dayjs from 'dayjs';
 import { Todo, getTodo, updateTodo } from '../libs/todo';
 
 interface TodoComp {
@@ -47,10 +48,23 @@ function TodoItem({ todo, children, requestInfo }: TodoComp) {
     <CSSTransition classNames="fade" timeout={300}>
       <Box display="flex" gap={1}>
         <Box flex={1}>
-          <FormControlLabel
-            control={<Checkbox checked={task.completed} onChange={handleCheckboxChange} />}
-            label={task.title}
-          />
+          <Box display="flex" alignItems="center" gap={1}>
+            <FormControlLabel
+              control={<Checkbox checked={task.completed} onChange={handleCheckboxChange} />}
+              label={task.title}
+            />
+            {task?.todoTime && (
+              <Typography
+                sx={{
+                  fontSize: '12px',
+                  lineHeight: '20px',
+                  fontWeight: 400,
+                  color: '#9CA3AF',
+                }}>
+                {dayjs(task.todoTime).format('YYYY-MM-DD HH:mm')}
+              </Typography>
+            )}
+          </Box>
         </Box>
         {children}
       </Box>

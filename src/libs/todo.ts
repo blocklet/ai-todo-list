@@ -12,6 +12,8 @@ export interface Todo {
   title: string;
   completed: boolean;
   updatedAt: string;
+  todoTime?: string;
+  todoKeyword?: string;
 }
 
 export function getTodos(): Promise<{ list: Todo[] }> {

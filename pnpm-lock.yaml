@@ -65,6 +65,9 @@ importers:
       cors:
         specifier: ^2.8.5
         version: 2.8.5
+      dayjs:
+        specifier: ^1.11.11
+        version: 1.11.11
       dotenv-flow:
         specifier: ^3.3.0
         version: 3.3.0
@@ -77,6 +80,9 @@ importers:
       framer-motion:
         specifier: ^11.2.6
         version: 11.2.6(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      joi:
+        specifier: ^17.13.1
+        version: 17.13.1
       js-cookie:
         specifier: ^3.0.5
         version: 3.0.5

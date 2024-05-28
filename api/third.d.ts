@@ -20,6 +20,8 @@ namespace Express {
       title: string;
       completed: boolean;
       updatedAt: string;
+      todoTime?: string;
+      todoKeyword?: string;
     }[];
   }
 }

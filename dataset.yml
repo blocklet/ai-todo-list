@@ -4,9 +4,24 @@
     description: Retrieve a list of all todo items.
     x-summary-zh: 获取所有待办事项
     x-description-zh: 检索所有待办事项列表。
+    parameters:
+      - in: query
+        name: todoTime
+        schema:
+          type: string
+          format: date-time
+        description: Filter todos by time.
+        x-description-zh: 按时间筛选待办事项。
+      - in: query
+        name: todoKeyword
+        schema:
+          type: string
+        description: Filter todos by keyword.
+        x-description-zh: 按关键词筛选待办事项。
     responses:
       "200":
         description: Successful operation. Returns a list of todos.
+        x-description-zh: 操作成功。返回待办事项列表。
         content:
           application/json:
             schema:
@@ -20,18 +35,32 @@
                       id:
                         type: string
                         description: The unique identifier of the todo item.
+                        x-description-zh: 待办事项的唯一标识符
                       title:
                         type: string
                         description: The title of the todo item.
+                        x-description-zh: 待办事项的标题
                       completed:
                         type: boolean
                         description: Indicates whether the todo item is completed or not.
+                        x-description-zh: 指示待办事项是否已完成
                       updatedAt:
                         type: string
                         format: date-time
                         description: The timestamp when the todo item was last updated.
+                        x-description-zh: 上次更新待办事项的时间戳
+                      todoKeyword:
+                        type: string
+                        description: The keyword of the todo.
+                        x-description-zh: 待办事项的关键词
+                      todoTime:
+                        type: string
+                        format: date-time
+                        description: The time of the todo.
+                        x-description-zh: 待办事项的时间
       "400":
         description: Bad request. An error occurred while processing the request.
+        x-description-zh: 错误请求。处理请求时出现错误。
   post:
     summary: Create a new todo
     description: Create a new todo item.
@@ -46,7 +75,17 @@
             properties:
               title:
                 type: string
-                description: The title of the todo
+                description: The key title of the todo
+                x-description-zh: 待办事项的关键标题
+              todoKeyword:
+                type: string
+                description: The keyword of the todo
+                x-description-zh: 待办事项的关键词
+              todoTime:
+                type: string
+                format: date-time
+                description: The time of the todo
+                x-description-zh: 待办事项的时间
     responses:
       "200":
         description: Successful operation. Returns the requested todo item.
@@ -61,16 +100,29 @@
                     id:
                       type: string
                       description: The unique identifier of the todo item.
+                      x-description-zh: 待办事项的唯一标识符
                     title:
                       type: string
                       description: The title of the todo item.
+                      x-description-zh: 待办事项的标题
                     completed:
                       type: boolean
                       description: Indicates whether the todo item is completed or not.
+                      x-description-zh: 指示待办事项是否已完成
                     updatedAt:
                       type: string
                       format: date-time
                       description: The timestamp when the todo item was last updated.
+                      x-description-zh: 上次更新待办事项的时间戳
+                    todoKeyword:
+                      type: string
+                      description: The keyword of the todo.
+                      x-description-zh: 待办事项的关键词
+                    todoTime:
+                      type: string
+                      format: date-time
+                      description: The time of the todo.
+                      x-description-zh: 待办事项的时间
 /api/todos/{id}:
   put:
     summary: Update a todo by ID
